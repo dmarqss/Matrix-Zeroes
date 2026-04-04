@@ -5,7 +5,6 @@ class MatrixZeroesTest {
 
     private final MatrixZeroes solution = new MatrixZeroes();
 
-    //metodo para comparar a matrix original com a resposta
     private void assertMatrixEquals(int[][] expected, int[][] actual) {
         assertEquals(expected.length, actual.length, "numero de linhas diferente");
 

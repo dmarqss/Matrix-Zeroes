@@ -1,6 +1,13 @@
 public class MatrixZeroes {
+    /**
+     * Modifica a matriz in-place: zerando toda a linha e coluna
+     * que contenha ao menos um elemento zero.
+     *
+     * Complexidade: O(M*N) tempo, O(1) espaço.
+     *
+     * @param matrix matriz MxN de inteiros, modificada diretamente
+     */
     public void setZeroes(int[][] matrix) {
-        // verifica se a matrix é valida
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
             return;
         }
@@ -8,24 +15,16 @@ public class MatrixZeroes {
         int rows = matrix.length;
         int cols = matrix[0].length;
 
-        // roda a primeira linha verificando se tem 0
         boolean firstRowHasZero = hasZeroInFirstRow(matrix, cols);
-
-        // roda a primeira coluna verificando se tem 0
         boolean firstColumnHasZero = hasZeroInFirstColumn(matrix, rows);
 
-        // roda toda a matrix e marca na primeira linha e coluna onde tem 0
+        //usa a primeira linha e coluna como marcadores para evitar alocação de espaço extra
         markZero(matrix, rows, cols);
-
-        // roda toda a matrix aplicando os 0 com base na primeira linha e coluna
         applyZero(matrix, rows, cols);
 
-        // zera a primeira linha caso tenha 0
+        //a primeira linha e coluna so devem ser zeradas no final, após applyZero consumir os marcadores
         if(firstRowHasZero){zeroFirstRow(matrix, cols);}
-
-        // zera a primeira coluna caso tenha 0
-        if(firstColumnHasZero){
-            zeroFirstColumn(matrix, rows);}
+        if(firstColumnHasZero){zeroFirstColumn(matrix, rows);}
     }
 
     private boolean hasZeroInFirstRow(int[][] matrix, int cols) {
